@@ -12,6 +12,7 @@ import static org.junit.jupiter.api.Assertions.*;
 class AppTest {
     Robot r1 = new Robot(5, 5, 1, 2, heading.N);
     Robot r2 = new Robot(5, 5, 0, 0, heading.E);
+    Robot r3 = new Robot(1, 1, 0, 0, heading.W);
         
     @Test void robotInitializedCorrectly() {
         String expectedR1 = "Grid:5,5 Pos:1,2 Heading:N";
@@ -26,4 +27,10 @@ class AppTest {
         r2.processCommands("RFLFFLRF");
         assertEquals("Report: 3 1 E", r2.report());
     }    
+
+    @Test void OutofBoundsException() throws Exception {
+        assertThrows(java.lang.Exception.class, () -> {
+            r3.processCommands("F"); 
+        });
+    }  
 }
