@@ -12,7 +12,6 @@ public class Robot {
         this.x = initialX;
         this.y = initialY;
         this.h = initialDirection;
-        System.out.println("Initializing Robot "+this.toString());
     }
 
     @Override
@@ -28,6 +27,7 @@ public class Robot {
                 case 'F': goForward();  break;
                 default: System.out.println("Unknown command '"+cmds.charAt(i)+"' at position "+(i+1));
             }
+            System.out.println(this.report());
         }
     }
 
@@ -41,13 +41,13 @@ public class Robot {
     
     protected void goForward() throws Exception {
         switch(h) {
-            case N: y++;    break;
-            case S: y--;    break;
+            case N: y--;    break;
+            case S: y++;    break;
             case E: x++;    break;
             case W: x--;    break;
             default: System.out.println("Unknown heading '"+h+"'");
         }
-        if(x > gridSizeX || y > gridSizeY || x <= 0 || y <= 0)
+        if(x >= gridSizeX || y >= gridSizeY || x < 0 || y < 0)
             throw new Exception("The robot went out of bounds!");
     }
 

@@ -13,7 +13,7 @@ public class App {
             r.processCommands("RFRFFRFRF");
         } catch (Exception e) {
             System.out.println(e.getMessage());
-            return;
+            //return;
         }
         System.out.println(r.report());
     }

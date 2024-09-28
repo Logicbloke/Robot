@@ -10,9 +10,20 @@ import robot.Robot.heading;
 import static org.junit.jupiter.api.Assertions.*;
 
 class AppTest {
+    Robot r1 = new Robot(5, 5, 1, 2, heading.N);
+    Robot r2 = new Robot(5, 5, 0, 0, heading.E);
+        
     @Test void robotInitializedCorrectly() {
-        Robot r = new Robot(5, 5, 1, 2, heading.N);
-        String expectedToString = "Grid:5,5 Pos:1,3 Heading:N";
-        assertEquals(expectedToString, r.toString());
+        String expectedR1 = "Grid:5,5 Pos:1,2 Heading:N";
+        assertEquals(expectedR1, r1.toString());
+        String expectedR2 = "Grid:5,5 Pos:0,0 Heading:E";
+        assertEquals(expectedR2, r2.toString());
     }
+
+    @Test void robotMovedCorrectly() throws Exception {
+        r1.processCommands("RFRFFRFRF");
+        assertEquals("Report: 1 3 N", r1.report());
+        r2.processCommands("RFLFFLRF");
+        assertEquals("Report: 3 1 E", r2.report());
+    }    
 }
