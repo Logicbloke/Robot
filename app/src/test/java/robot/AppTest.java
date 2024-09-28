@@ -10,13 +10,10 @@ import robot.Robot.heading;
 import static org.junit.jupiter.api.Assertions.*;
 
 class AppTest {
-    Robot r0 = new Robot(5, 7, 3, 3, heading.N);
-    Robot r1 = new Robot(5, 5, 1, 2, heading.N);
-    Robot r2 = new Robot(5, 5, 0, 0, heading.E);
-    Robot r3 = new Robot(1, 1, 0, 0, heading.W);
-    Robot r4 = new Robot(10, 10, 4, 5, heading.S);
         
-    @Test void robotInitializedCorrectly() {
+    @Test void robotInitializedCorrectly() throws Exception {
+        Robot r1 = new Robot(5, 5, 1, 2, heading.N);
+        Robot r2 = new Robot(5, 5, 0, 0, heading.E);
         String expectedR1 = "Grid:5,5 Pos:1,2 Heading:N";
         assertEquals(expectedR1, r1.toString());
         String expectedR2 = "Grid:5,5 Pos:0,0 Heading:E";
@@ -24,6 +21,9 @@ class AppTest {
     }
 
     @Test void robotMovedCorrectly() throws Exception {
+        Robot r0 = new Robot(5, 7, 3, 3, heading.N);
+        Robot r1 = new Robot(5, 5, 1, 2, heading.N);
+        Robot r2 = new Robot(5, 5, 0, 0, heading.E);
         r0.processCommands("LFFRFRFRFF");
         assertEquals("Report: 2 4 S", r0.report());
         r1.processCommands("RFRFFRFRF");
@@ -33,12 +33,17 @@ class AppTest {
     }    
 
     @Test void OutofBoundsException() throws Exception {
+        Robot r3 = new Robot(1, 1, 0, 0, heading.W);
         assertThrows(java.lang.Exception.class, () -> {
             r3.processCommands("F"); 
+        });
+        assertThrows(java.lang.Exception.class, () -> {
+            Robot r4 = new Robot(1, 1, -1, 0, heading.W);
         });
     }  
 
     @Test void robotIgnoresUnknownCommands() throws Exception {
+        Robot r4 = new Robot(10, 10, 4, 5, heading.S);
         Robot r4c = (Robot) r4.clone();
         r4.processCommands("RLORLBLRORLTF");
         r4c.processCommands("RLRLLRRLF");

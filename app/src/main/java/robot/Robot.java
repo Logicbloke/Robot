@@ -3,16 +3,18 @@ package robot;
 public class Robot implements Cloneable {
     protected int gridSizeX, gridSizeY;             // Grid where the robot can move
     protected int x,y;                              // Robot's current coordinates
-    protected enum heading {N, E, S, W};           
+    protected static enum heading {N, E, S, W};           
     protected heading h;                             // Direction the robot is facing
     protected Boolean debug = false;
 
-    Robot(int gridSizeX, int gridSizeY, int initialX, int initialY, heading initialDirection) {
+    protected Robot(int gridSizeX, int gridSizeY, int initialX, int initialY, heading initialDirection) throws Exception {
         this.gridSizeX = gridSizeX;
         this.gridSizeY = gridSizeY;
         this.x = initialX;
         this.y = initialY;
         this.h = initialDirection;
+        if(initialX >= gridSizeX || initialY >= gridSizeY || initialX < 0 || initialY < 0)
+            throw new Exception("The robot went out of bounds!");
         if(debug) System.out.println("Initialized "+this.toString());
     }
 
