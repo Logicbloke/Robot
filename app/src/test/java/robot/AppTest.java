@@ -4,11 +4,15 @@
 package robot;
 
 import org.junit.jupiter.api.Test;
+
+import robot.Robot.heading;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 class AppTest {
-    @Test void appHasAGreeting() {
-        App classUnderTest = new App();
-        assertNotNull(classUnderTest.getGreeting(), "app should have a greeting");
+    @Test void robotInitializedCorrectly() {
+        Robot r = new Robot(5, 5, 1, 2, heading.N);
+        String expectedToString = "Grid:5,5 Pos:1,3 Heading:N";
+        assertEquals(expectedToString, r.toString());
     }
 }

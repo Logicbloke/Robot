@@ -3,12 +3,18 @@
  */
 package robot;
 
+import robot.Robot.heading;
+
 public class App {
-    public String getGreeting() {
-        return "Hello World!";
-    }
 
     public static void main(String[] args) {
-        System.out.println(new App().getGreeting());
+        Robot r = new Robot(5, 5, 1, 2, heading.N);
+        try {
+            r.processCommands("RFRFFRFRF");
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            return;
+        }
+        System.out.println(r.report());
     }
 }
