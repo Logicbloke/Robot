@@ -8,6 +8,7 @@ import robot.Robot.heading;
 public class App {
 
     public static void main(String[] args) {
+        // TODO: Implement Scanner for manual input
         Robot r = new Robot(5, 5, 3, 3, heading.W);
         try {
             r.processCommands("F");

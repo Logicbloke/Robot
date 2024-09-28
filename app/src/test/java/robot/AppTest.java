@@ -10,6 +10,7 @@ import robot.Robot.heading;
 import static org.junit.jupiter.api.Assertions.*;
 
 class AppTest {
+    Robot r0 = new Robot(5, 7, 3, 3, heading.N);
     Robot r1 = new Robot(5, 5, 1, 2, heading.N);
     Robot r2 = new Robot(5, 5, 0, 0, heading.E);
     Robot r3 = new Robot(1, 1, 0, 0, heading.W);
@@ -23,6 +24,8 @@ class AppTest {
     }
 
     @Test void robotMovedCorrectly() throws Exception {
+        r0.processCommands("LFFRFRFRFF");
+        assertEquals("Report: 2 4 S", r0.report());
         r1.processCommands("RFRFFRFRF");
         assertEquals("Report: 1 3 N", r1.report());
         r2.processCommands("RFLFFLRF");
@@ -36,9 +39,9 @@ class AppTest {
     }  
 
     @Test void robotIgnoresUnknownCommands() throws Exception {
-        Robot r5 = (Robot) r4.clone();
+        Robot r4c = (Robot) r4.clone();
         r4.processCommands("RLORLBLRORLTF");
-        r5.processCommands("RLRLLRRLF");
-        assertEquals(r4.report(), r5.report());
+        r4c.processCommands("RLRLLRRLF");
+        assertEquals(r4.report(), r4c.report());
     }
 }
