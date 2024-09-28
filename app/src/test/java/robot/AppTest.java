@@ -13,6 +13,7 @@ class AppTest {
     Robot r1 = new Robot(5, 5, 1, 2, heading.N);
     Robot r2 = new Robot(5, 5, 0, 0, heading.E);
     Robot r3 = new Robot(1, 1, 0, 0, heading.W);
+    Robot r4 = new Robot(10, 10, 4, 5, heading.S);
         
     @Test void robotInitializedCorrectly() {
         String expectedR1 = "Grid:5,5 Pos:1,2 Heading:N";
@@ -33,4 +34,11 @@ class AppTest {
             r3.processCommands("F"); 
         });
     }  
+
+    @Test void robotIgnoresUnknownCommands() throws Exception {
+        Robot r5 = (Robot) r4.clone();
+        r4.processCommands("RLORLBLRORLTF");
+        r5.processCommands("RLRLLRRLF");
+        assertEquals(r4.report(), r5.report());
+    }
 }

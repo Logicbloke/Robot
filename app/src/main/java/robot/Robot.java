@@ -1,10 +1,11 @@
 package robot;
 
-public class Robot {
+public class Robot implements Cloneable {
     protected int gridSizeX, gridSizeY;             // Grid where the robot can move
     protected int x,y;                              // Robot's current coordinates
     protected enum heading {N, E, S, W};           
     protected heading h;                             // Direction the robot is facing
+    protected Boolean debug = false;
 
     Robot(int gridSizeX, int gridSizeY, int initialX, int initialY, heading initialDirection) {
         this.gridSizeX = gridSizeX;
@@ -12,6 +13,7 @@ public class Robot {
         this.x = initialX;
         this.y = initialY;
         this.h = initialDirection;
+        if(debug) System.out.println("Initialized "+this.toString());
     }
 
     @Override
@@ -27,7 +29,7 @@ public class Robot {
                 case 'F': goForward();  break;
                 default: System.out.println("Unknown command '"+cmds.charAt(i)+"' at position "+(i+1));
             }
-            System.out.println(this.report());
+            if(debug) System.out.println(this.report());
         }
     }
 
@@ -53,5 +55,10 @@ public class Robot {
 
     public String report() {
         return "Report: "+x+" "+y+" "+h;
+    }
+
+    @Override
+    protected Object clone() throws CloneNotSupportedException {
+        return super.clone();
     }
 }
